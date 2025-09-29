@@ -1,11 +1,12 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import reviewsData from "@/app/data/reviews.json";
 
 export async function GET(
-  request: Request,
-  { params }: { params: { bookId: string } }
+  request: NextRequest,
+  context: { params: { bookId: string } }
 ) {
-  const { bookId } = params;
+  const { bookId } = context.params;
+
   // filter reviews by bookId
   const bookReviews = reviewsData.reviews.filter(
     (review) => review.bookId === bookId
