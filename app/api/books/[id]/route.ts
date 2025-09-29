@@ -3,9 +3,9 @@ import booksData from "@/app/data/books.json";
 
 export async function GET(
   request: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
-  const { id } = context.params;
+  const { id } = await context.params; // ⬅️ Notice the await
 
   // find book by ID
   const book = booksData.books.find((b) => b.id === id);

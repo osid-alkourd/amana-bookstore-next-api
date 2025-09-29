@@ -3,9 +3,9 @@ import reviewsData from "@/app/data/reviews.json";
 
 export async function GET(
   request: NextRequest,
-  context: { params: { bookId: string } }
+context: { params: Promise<{ bookId: string }> }
 ) {
-  const { bookId } = context.params;
+const { bookId } = await context.params;
 
   // filter reviews by bookId
   const bookReviews = reviewsData.reviews.filter(
